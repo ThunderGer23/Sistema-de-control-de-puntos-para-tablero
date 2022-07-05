@@ -186,5 +186,7 @@ void loop() {
   //lcd.setCursor(1, 0);
   if(Tecla){
     Serial.print("La tecla presionada es: " + Tecla);
+  }else{
+    Serial.print("Esperando tecla presionada");
   }
 }
