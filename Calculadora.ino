@@ -32,161 +32,36 @@ y posterior traslado a un Arduino Pro Micro:
 */
 
 // include the library code:
-#include <LiquidCrystal.h>
 #include <Keypad.h>
 
 const byte FILAS = 4;
 const byte COLUMNAS = 4;
 char keys [FILAS][COLUMNAS] = {
-  {'1','2','3','A'},
-  {'4','5','6','B'},
-  {'7','8','9','C'},
-  {'*','0','#','D'},  
+  {'1','2','3','-'},
+  {'4','5','6','+'},
+  {'7','8','9','='},
+  {'*','0','(',')'},  
 };
 
-byte pinFilas[FILAS] = {9,8,7,6};
-byte pinColumnas[COLUMNAS] = {5,4,3,2};
+byte pinFilas[FILAS] = {6,7,8,9};
+byte pinColumnas[COLUMNAS] = {10,11,12,13};
 
 Keypad teclado = Keypad(makeKeymap(keys), pinFilas, pinColumnas, FILAS, COLUMNAS);
 char Tecla;
-// initialize the library by associating any needed LCD interface pin
-// with the arduino pin number it is connected to
-const int rs = 1, en = 0, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-// make some custom characters:
-byte heart[8] = {
-  0b00000,
-  0b11000,
-  0b01100,
-  0b00011,
-  0b00011,
-  0b00011,
-  0b00011,
-  0b00111
-};
-
-byte smiley[8] = {
-  0b00000,
-  0b01100,
-  0b11000,
-  0b00000,
-  0b00110,
-  0b00010,
-  0b00010,
-  0b10001
-};
-
-byte frownie[8] = {
-  0b00000,
-  0b00000,
-  0b00000,
-  0b00011,
-  0b11000,
-  0b10000,
-  0b10000,
-  0b11000
-};
-
-byte armsDown[8] = {
-  0b00000,
-  0b01100,
-  0b10010,
-  0b10000,
-  0b10000,
-  0b10110,
-  0b10010,
-  0b01100
-};
-
-byte armsUp[8] = {
-  0b00000,
-  0b00000,
-  0b10000,
-  0b00011,
-  0b11000,
-  0b10000,
-  0b10000,
-  0b10000
-};
-
-byte letter[8] = {
-  0b00000,
-  0b01100,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b01100
-};
-
-byte lettera[8] = {
-  0b00000,
-  0b11000,
-  0b01000,
-  0b01000,
-  0b01100,
-  0b01010,
-  0b01010,
-  0b11011
-};
-
-byte letterb[8] = {
-  0b11111,
-  0b01110,
-  0b01110,
-  0b00100,
-  0b00100,
-  0b00000,
-  0b01110,
-  0b01110
-};
 
 void setup() {
-  // initialize LCD and set up the number of columns and rows:
-  lcd.begin(16, 2);
-
-  // create a new character
-  lcd.createChar(0, heart);
-  // create a new character
-  lcd.createChar(1, smiley);
-  // create a new character
-  lcd.createChar(2, frownie);
-  // create a new character
-  lcd.createChar(3, armsDown);
-  // create a new character
-  lcd.createChar(4, armsUp);
-  // create a new character
-  lcd.createChar(5, letter);
-  // create a new character
-  lcd.createChar(6, lettera);
-  // create a new character
-  lcd.createChar(7, letterb);
-
-  // set the cursor to the top left
-  lcd.setCursor(0, 0);
-
-  // Print a message to the lcd.
-  //lcd.print("I ");
-  lcd.write(byte(0)); // when calling lcd.write() '0' must be cast as a byte
-  //lcd.print(" Arduino! ");
-  lcd.write((byte)1);
-  lcd.write((byte)2);
-  lcd.write((byte)3);
-  lcd.write((byte)4);
-  lcd.write((byte)5);
-  lcd.write((byte)6);
-  lcd.write((byte)7);
   Serial.begin(9600);
 }
 
 void loop() {
-  Tecla = teclado.getKey();
-  //lcd.setCursor(1, 0);
+  Tecla = teclado.getKey();  
   if(Tecla){
-    Serial.print("La tecla presionada es: " + Tecla);
-  }else{
-    Serial.print("Esperando tecla presionada");
+    Serial.print("La tecla presionada es: ");
+    Serial.println(Tecla);
+    if (Tecla < 47)
+    {
+      Serial.print("Signo");
+    }
   }
 }
