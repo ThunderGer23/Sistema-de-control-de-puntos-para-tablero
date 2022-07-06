@@ -1,12 +1,10 @@
 <h1 align="center"> Sistema de control de puntos para tablero de cartas</h1>
 
-<p align="center"><img src="https://github.com/ThunderGer23/imagesforReadme/blob/master/Codigo2.png"/></p>
+<p align="center"><img src="/assets/Codigo2.png"/></p>
 
-_Acá va un párrafo que describa lo que es el proyecto_
+_Control de puntos e iluminación para juegos de cartas implentado con Arduino_
 
-
-
-### Ejemplos de badges
+### Badges
 
 - code coverage percentage: ![coverage](https://img.shields.io/badge/coverage-45%25-yellowgreen)
 - stable release version: ![version](https://img.shields.io/badge/version-1.0-blue)
