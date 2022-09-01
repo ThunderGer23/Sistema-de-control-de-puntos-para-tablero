@@ -2,7 +2,6 @@
 
 Código para la implementación de calculadora
 
-
 Funcionamiento sugerido para el ahorro de pines
 y posterior traslado a un Arduino Pro Micro:
 
@@ -32,116 +31,19 @@ y posterior traslado a un Arduino Pro Micro:
 */
 
 // include the library code:
-#include <Keypad.h>
+#include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
 
-//Declare constants for the Keypad
-const byte FILAS = 4;
-const byte COLUMNAS = 4;
-char keys[FILAS][COLUMNAS] = {
-    {'1', '2', '3', '-'},
-    {'4', '5', '6', '+'},
-    {'7', '8', '9', '&'},
-    {'*', '0', '!', '='},
-};
-
-byte pinFilas[FILAS] = {6, 7, 8, 9};
-byte pinColumnas[COLUMNAS] = {10, 11, 12, 13};
-byte pinFilas1[FILAS] = {14, 15, 16, 17};
-byte pinColumnas1[COLUMNAS] = {18, 19, 20, 21};
-
-Keypad keypad = Keypad(makeKeymap(keys), pinFilas, pinColumnas, FILAS, COLUMNAS);
-Keypad teclado2 = Keypad(makeKeymap(keys), pinFilas1, pinColumnas1, FILAS, COLUMNAS);
-char Key, Key2;
-int Number, Num1, Num2, Number1, Num3, Num4;
-int Value = 1;
-int Value1 = 1;
-int Opera = 0;
-int Opera1 = 0;
-String Val1, Val2, Val3, Val4;
+LiquidCrystal LCD(27, 26, 25, 24, 23, 22);
 
 void setup(){
   Serial.begin(9600);
+  LCD.begin(16, 2);
 }
 
 void loop(){
-  Key = keypad.getKey();     //-> Obtiene el valor del teclado
-  if (Key){                   //Si se presiona la tecla evaluamos que se presiono
-    if (Key < 47){            //Si fue un signo?                  
-      if(Key >= 42){          //Si se pidio alguna operación
-        if(Value){              
-          Num1 = Val1.toInt();
-          Val1= "";
-          Value = 0;
-          if(Key == 42){
-            Serial.print("*");  
-          }else if(Key == 43){
-            Serial.print("+");
-            Opera += 1;  
-          }else{
-            Serial.print("-");  
-            Opera += 2;
-          }
-        }else{
-          if(Key == 42){
-            Serial.print("*");  
-          }else if(Key == 43){
-            Serial.print("+");
-            Opera += 1;  
-          }else{
-            Serial.print("-");  
-            Opera += 2;
-          }
-        }
-      }else if(Key == 38){        
-        if(Value){          
-          Serial.print("Numero 1: ");
-          Val1.remove(Val1.length()-1);
-          Serial.println(Val1);
-        }else{          
-          Serial.print("Numero 2: ");
-          Val2.remove(Val2.length()-1);
-          Serial.println(Val2);
-        }
-      }else if(Key == 33){        
-        Val1 = "";
-        Val2 = "";
-        Value = 1;
-      }
-    }else if (Key == 61){
-      //Resultado de la operación   
-      Num2 = Val2.toInt();   
-      if(Num1 >= 0 && Num2 >= 0 || Num1 <= 0 && Num2 <= 0 || Num1 <= 0 && Num2 >= 0 || Num1 >= 0 && Num2 <= 0){       
-        Val2= "";      
-        int Res;  
-        if(Opera == 1){
-          Res = Num1+Num2;
-          Serial.print("El resltado es:");
-          Serial.println(Res);
-        }else if(Opera == 2){
-          Res = Num1-Num2;
-          Serial.print("El resltado es:");         
-          Serial.println(Res);
-        }else{
-          Res = Num1*Num2;
-          Serial.print("El resltado es:");
-          Serial.println(Res);
-        }      
-        Num1 = Res;
-        Opera = 0;      
-      }
-    }else{
-      //Concatena numeros en una variable
-      if (Value){        
-        Serial.print("Numero 1: ");
-        Number = Key - 48;
-        Val1 += Number;
-        Serial.println(Val1);
-      }else{
-        Serial.print("Numero 2: ");
-        Number = Key - 48;
-        Val2 += Number;
-        Serial.println(Val2);
-      } 
-    }
-  }
+  LCD.setCursor(0, 0);
+  LCD.print("Hola mundo :v");
+  LCD.setCursor(0, 1);
+  LCD.cursor();
 }
