@@ -34,16 +34,19 @@ y posterior traslado a un Arduino Pro Micro:
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 
-LiquidCrystal LCD(2,3,4,5,6,7);
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal LCD(rs, en, d4, d5, d6, d7);
 
 void setup(){
   Serial.begin(9600);
   LCD.begin(16, 2);
 }
 
+
 void loop(){
-  LCD.setCursor(0, 0);
   LCD.print("Hola mundo :v");
-  LCD.setCursor(0, 1);
-  LCD.cursor();
+  //LCD.setCursor(0, 0);
+  delay(3000);
+  //LCD.setCursor(0, 1);
+  //LCD.cursor();
 }
