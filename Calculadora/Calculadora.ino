@@ -34,6 +34,7 @@ y posterior traslado a un Arduino Pro Micro:
 #include <LiquidCrystal.h>;
 #include <SoftwareSerial.h>;
 #include "libYugioh.h"
+#include "libPokemon.h"
 
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -43,57 +44,45 @@ void setup() {
   lcd.begin(16, 2);
 
   // create a new character
-  lcd.createChar(0, Y);
-  // create a new character
-  lcd.createChar(1, Yu);
-  // create a new character
-  lcd.createChar(2, u);
-  // create a new character
-  lcd.createChar(3, G);
-  // create a new character
-  lcd.createChar(4, i);
-  // create a new character
-  lcd.createChar(5, O);
-  // create a new character
-  lcd.createChar(6, h);
-  // create a new character
-  lcd.createChar(7, bang);
-
-  // set the cursor to the top left
-  lcd.setCursor(0, 0);
-
-  // Print a message to the lcd.
-  //lcd.print("I ");
-  /*lcd.write(byte(0)); // when calling lcd.write() '0' must be cast as a byte
-  //lcd.print(" Arduino! ");
-  lcd.write((byte)1);
-  lcd.write((byte)2);
-  lcd.write((byte)3);
-  lcd.write((byte)4);
-  lcd.write((byte)5);
-  lcd.write((byte)6);
-  lcd.write((byte)7);*/
-  lcd.setCursor(0, 0);
+  lcd.createChar(0, S00);
+  lcd.createChar(1, S01);
+  lcd.createChar(2, S02);
+  lcd.createChar(3, S03);
+  lcd.createChar(4, S04);
+  lcd.createChar(5, S05);
+  lcd.createChar(6, S06);
+  lcd.createChar(7, S07);
+  lcd.createChar(8, S08);
+  lcd.createChar(9, S09);
+  lcd.createChar(10,S10);
+  lcd.setCursor(0,0);
   Serial.begin(9600);
 }
-
-
 
 void loop(){
   lcd.write(byte(0));
   delay(100);
-  lcd.write((byte)1);
+  lcd.write(byte(1));
   delay(100);
-  lcd.write((byte)2);
+  lcd.write(byte(2));
   delay(100);
-  lcd.write((byte)3);
+  lcd.write(byte(3));
   delay(100);
-  lcd.write((byte)4);
+  lcd.write(byte(4));
   delay(100);
-  lcd.write((byte)5);
+  lcd.write(byte(5));
   delay(100);
-  lcd.write((byte)6);
+  lcd.write(byte(6));
   delay(100);
-  lcd.write((byte)7);
+  lcd.write(byte(7));
   delay(100);
+  lcd.write(byte(8));
+  delay(100);
+  lcd.write(byte(9));
+  delay(100);
+  lcd.write(byte(10));
+  delay(100);
+  lcd.write(byte(11));
+  delay(100);
+  delay(100000);
 }
