@@ -46,9 +46,11 @@ char keys[FILAS][COLUMNAS] = {
 
 byte pinFilas[FILAS] = {6, 7, 8, 9};
 byte pinColumnas[COLUMNAS] = {10, 11, 12, 13};
+byte pinFilas1[FILAS] = {14, 15, 16, 17};
+byte pinColumnas1[COLUMNAS] = {18, 19, 20, 21};
 
 Keypad keypad = Keypad(makeKeymap(keys), pinFilas, pinColumnas, FILAS, COLUMNAS);
-Keypad teclado2 = Keypad(makeKeymap(keys), pinFilas, pinColumnas, FILAS, COLUMNAS);
+Keypad teclado2 = Keypad(makeKeymap(keys), pinFilas1, pinColumnas1, FILAS, COLUMNAS);
 char Key, Key2;
 int Number, Num1, Num2, Number1, Num3, Num4;
 int Value = 1;
