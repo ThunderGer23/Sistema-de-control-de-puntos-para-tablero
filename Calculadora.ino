@@ -34,7 +34,7 @@ y posterior traslado a un Arduino Pro Micro:
 #include <LiquidCrystal.h>
 #include <SoftwareSerial.h>
 
-LiquidCrystal LCD(27, 26, 25, 24, 23, 22);
+LiquidCrystal LCD(2,3,4,5,6,7);
 
 void setup(){
   Serial.begin(9600);
