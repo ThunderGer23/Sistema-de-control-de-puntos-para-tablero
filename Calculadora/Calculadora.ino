@@ -31,122 +31,40 @@ y posterior traslado a un Arduino Pro Micro:
 */
 
 // include the library code:
-// make some custom characters:
-byte heart[8] = {
-  0b00000,
-  0b11000,
-  0b01100,
-  0b00011,
-  0b00011,
-  0b00011,
-  0b00011,
-  0b00111
-};
+#include <LiquidCrystal.h>;
+#include <SoftwareSerial.h>;
+#include "libYugioh.h"
 
-byte smiley[8] = {
-  0b00000,
-  0b01100,
-  0b11000,
-  0b00000,
-  0b00110,
-  0b00010,
-  0b00010,
-  0b10001
-};
-
-byte frownie[8] = {
-  0b00000,
-  0b00000,
-  0b00000,
-  0b00011,
-  0b11000,
-  0b10000,
-  0b10000,
-  0b11000
-};
-
-byte armsDown[8] = {
-  0b00000,
-  0b01100,
-  0b10010,
-  0b10000,
-  0b10000,
-  0b10110,
-  0b10010,
-  0b01100
-};
-
-byte armsUp[8] = {
-  0b00000,
-  0b00000,
-  0b10000,
-  0b00011,
-  0b11000,
-  0b10000,
-  0b10000,
-  0b10000
-};
-
-byte letter[8] = {
-  0b00000,
-  0b01100,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b10010,
-  0b01100
-};
-
-byte lettera[8] = {
-  0b00000,
-  0b11000,
-  0b01000,
-  0b01000,
-  0b01100,
-  0b01010,
-  0b01010,
-  0b11011
-};
-
-byte letterb[8] = {
-  0b11111,
-  0b01110,
-  0b01110,
-  0b00100,
-  0b00100,
-  0b00000,
-  0b01110,
-  0b01110
-};
+const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 void setup() {
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
 
   // create a new character
-  lcd.createChar(0, heart);
+  lcd.createChar(0, Y);
   // create a new character
-  lcd.createChar(1, smiley);
+  lcd.createChar(1, Yu);
   // create a new character
-  lcd.createChar(2, frownie);
+  lcd.createChar(2, u);
   // create a new character
-  lcd.createChar(3, armsDown);
+  lcd.createChar(3, G);
   // create a new character
-  lcd.createChar(4, armsUp);
+  lcd.createChar(4, i);
   // create a new character
-  lcd.createChar(5, letter);
+  lcd.createChar(5, O);
   // create a new character
-  lcd.createChar(6, lettera);
+  lcd.createChar(6, h);
   // create a new character
-  lcd.createChar(7, letterb);
+  lcd.createChar(7, bang);
 
   // set the cursor to the top left
   lcd.setCursor(0, 0);
 
   // Print a message to the lcd.
   //lcd.print("I ");
-  lcd.write(byte(0)); // when calling lcd.write() '0' must be cast as a byte
+  /*lcd.write(byte(0)); // when calling lcd.write() '0' must be cast as a byte
   //lcd.print(" Arduino! ");
   lcd.write((byte)1);
   lcd.write((byte)2);
@@ -154,16 +72,28 @@ void setup() {
   lcd.write((byte)4);
   lcd.write((byte)5);
   lcd.write((byte)6);
-  lcd.write((byte)7);
+  lcd.write((byte)7);*/
+  lcd.setCursor(0, 0);
   Serial.begin(9600);
 }
 
 
 
 void loop(){
-  LCD.print("Hola mundo :v");
-  //LCD.setCursor(0, 0);
-  delay(3000);
-  //LCD.setCursor(0, 1);
-  //LCD.cursor();
+  lcd.write(byte(0));
+  delay(100);
+  lcd.write((byte)1);
+  delay(100);
+  lcd.write((byte)2);
+  delay(100);
+  lcd.write((byte)3);
+  delay(100);
+  lcd.write((byte)4);
+  delay(100);
+  lcd.write((byte)5);
+  delay(100);
+  lcd.write((byte)6);
+  delay(100);
+  lcd.write((byte)7);
+  delay(100);
 }
