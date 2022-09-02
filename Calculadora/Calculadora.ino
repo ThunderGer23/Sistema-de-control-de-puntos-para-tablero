@@ -50,9 +50,11 @@ void setup() {
 }
 
 void loop(){
-  Key = keypad.getKey();     //-> Obtiene el valor del teclado
-  lcd.print(Key);
+  Key = keypad.getKey();
+  if(Key){//-> Obtiene el valor del teclado
+    lcd.write(Key);
+  }
 }
 
-int Opera(int a, int b, ){
+int Opera(int a, int b ){
 }

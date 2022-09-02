@@ -1,7 +1,8 @@
-#ifndef libPokemon_h;
-#define libPokemon_h;
+#ifndef libKeypad_h;
+#define libKeypad_h;
 #include "arduino.h";
-#include <Keypad.h>;
+#include <Key.h>
+#include <Keypad.h>
 
 const byte FILAS = 4;
 const byte COLUMNAS = 4;
