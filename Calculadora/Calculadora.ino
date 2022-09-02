@@ -36,6 +36,9 @@ y posterior traslado a un Arduino Pro Micro:
 #include "libYugioh.h"
 #include "libPokemon.h"
 #include "libMagic.h"
+#include "libKeypad.h"
+
+char Key, Key2;
 
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -43,47 +46,13 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 void setup() {
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
-
-  // create a new character
-  lcd.createChar(0, S00);
-  lcd.createChar(1, S01);
-  lcd.createChar(2, S02);
-  lcd.createChar(3, S03);
-  lcd.createChar(4, S04);
-  lcd.createChar(5, S05);
-  lcd.createChar(6, S06);
-  lcd.createChar(7, S07);
-  lcd.createChar(8, S08);
-  lcd.createChar(9, S09);
-  lcd.createChar(10,S10);
-  lcd.setCursor(0,0);
   Serial.begin(9600);
 }
 
 void loop(){
-  lcd.write(byte(0));
-  delay(100);
-  lcd.write(byte(1));
-  delay(100);
-  lcd.write(byte(2));
-  delay(100);
-  lcd.write(byte(3));
-  delay(100);
-  lcd.write(byte(4));
-  delay(100);
-  lcd.write(byte(5));
-  delay(100);
-  lcd.write(byte(6));
-  delay(100);
-  lcd.write(byte(7));
-  delay(100);
-  lcd.write(byte(8));
-  delay(100);
-  lcd.write(byte(9));
-  delay(100);
-  lcd.write(byte(10));
-  delay(100);
-  lcd.write(byte(11));
-  delay(100);
-  delay(100000);
+  Key = keypad.getKey();     //-> Obtiene el valor del teclado
+  lcd.print(Key);
+}
+
+int Opera(int a, int b, ){
 }
