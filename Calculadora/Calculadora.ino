@@ -30,7 +30,7 @@ y posterior traslado a un Arduino Pro Micro:
  * 10K poterntiometer on pin A0
 */
 
-// include the library code:
+//Including the libraries that are needed for the program to run.:
 #include <LiquidCrystal.h>;
 #include <SoftwareSerial.h>;
 #include "libYugioh.h"
@@ -39,9 +39,13 @@ y posterior traslado a un Arduino Pro Micro:
 #include "libKeypad.h"
 
 char Key, Key2;
-
-const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+int pos;
+//Creating an instance of the LiquidCrystal library.
+//pinout rs=7, en=6, d4=5, d5=4, d6=3, d7=2;
+LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+//Creating a second instance of the LiquidCrystal library.
+//pinout rs=13, en=12, d4=11, d5=10, d6=9, d7=8;
+LiquidCrystal lcd1(13, 12, 11, 10, 9, 8);
 
 void setup() {
   // initialize LCD and set up the number of columns and rows:
@@ -50,11 +54,18 @@ void setup() {
 }
 
 void loop(){
-  Key = keypad.getKey();
-  if(Key){//-> Obtiene el valor del teclado
-    lcd.write(Key);
-  }
+  Menu();
 }
 
-int Opera(int a, int b ){
+int Menu(){
+  Key = keypad.getKey();
+  if(Key){//-> Obtiene el valor del teclado
+    for (pos = 0; pos < 13; pos++){
+      lcd.write(Key);
+
+    }
+  }
+  
 }
+
+
