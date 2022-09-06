@@ -61,8 +61,13 @@ int Menu(){
   Key = keypad.getKey();
   if(Key){//-> Obtiene el valor del teclado
     lcd.setCursor(16, 1);
-    lcd.write(Key);
     lcd.autoscroll();
+    for (pos = 0; pos < 10; pos++){
+      lcd.write(Key);
+      delay(500);
+    }
+    lcd.noAutoscroll();
+    lcd.clear();
   }
 }
 
