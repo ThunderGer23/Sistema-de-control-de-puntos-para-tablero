@@ -2,8 +2,6 @@
 #define libYugioh_h;
 #include "arduino.h";
 
-// make some custom characters:
-
 byte yugioh[8][8] = {
   {
     0b00000,

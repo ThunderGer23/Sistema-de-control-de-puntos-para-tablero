@@ -89,23 +89,23 @@ void writeMagic(){
 }
 
 void writeYugioh(){
-  for(j=0;j<=7;j++){
-    lcd.setCursor(j,0);
+  for(j = 0;j <= 7;j++){
     lcd.createChar(j,yugioh[j]);
-    Serial.print(j);
+    lcd.setCursor(j,0);
     lcd.write(byte(j));
   }
 }
 
 void setup() {
+  // initiate keypad button matrix
+  
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
   Serial.begin(9600);
 }
 
 void loop(){
-  writeYugioh();
-  //Menu();
+  Menu();
 }
 
 int Menu(){
@@ -113,11 +113,25 @@ int Menu(){
   if(Key){//-> Obtiene el valor del teclado
     lcd.setCursor(15, 0);
     lcd.autoscroll();
-    for (pos = 0; pos < 10; pos++){
+    switch(Key){
+      case 1:
+        writeYugioh();
+        break;
+      case 2:
+        writePokemon();
+        break;
+      case 3:
+        writeMagic();
+        break;
+      default:
+        lcd.setCursor(0,0);
+        lcd.write("No valid :(");
+    }
+    /*for (pos = 0; pos < 10; pos++){
       lcd.clear();
       lcd.write(Key);
       delay(500);
-    }
+    }*/
     lcd.noAutoscroll();
   }
 }
