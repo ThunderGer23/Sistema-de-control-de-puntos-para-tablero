@@ -636,6 +636,11 @@ void Menu(){
     Load();
   }
   Welcome();
+  lcd1.setCursor(2, 0);
+  lcd1.print("Esperando configuración");
+
+  //Aquí hay que poner a pintar las opciones en la primer LCD
+
 }
 
 void Welcome(){
