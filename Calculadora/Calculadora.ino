@@ -56,43 +56,81 @@ int j;
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 //Creating a second instance of the LiquidCrystal library.
 //pinout rs=13, en=12, d4=11, d5=10, d6=9, d7=8;
-LiquidCrystal lcd1(13, 12, 11, 10, 9, 8);
+LiquidCrystal lcd1(9, 8, 5, 4, 3, 2);
 
-void writePokemon(){
-  for(j = 0;j <= 5;j++){
-    lcd.createChar(j,pokeball[j]);
+void writePokemon(int d){
+  if(d==0){
+    for(j = 0;j <= 5;j++){
+      lcd.createChar(j,pokeball[j]);
+    }
+    lcd.setCursor(0,0);
+    lcd.write(byte(0));
+    lcd.write(byte(1));
+    lcd.write(byte(2));
+  
+    lcd.setCursor(0,1);
+    lcd.write(byte(3));
+    lcd.write(byte(4));
+    lcd.write(byte(5));
+  }else{
+    for(j = 0;j <= 5;j++){
+      lcd1.createChar(j,pokeball[j]);
+    }
+    lcd1.setCursor(0,0);
+    lcd1.write(byte(0));
+    lcd1.write(byte(1));
+    lcd1.write(byte(2));
+  
+    lcd1.setCursor(0,1);
+    lcd1.write(byte(3));
+    lcd1.write(byte(4));
+    lcd1.write(byte(5));
   }
-  lcd.setCursor(0,0);
-  lcd.write(byte(0));
-  lcd.write(byte(1));
-  lcd.write(byte(2));
-
-  lcd.setCursor(0,1);
-  lcd.write(byte(3));
-  lcd.write(byte(4));
-  lcd.write(byte(5));
 }
 
-void writeMagic(){
-  for(j = 0;j <= 5;j++){
-    lcd.createChar(j,magicM[j]);
+void writeMagic(int d){
+  if(d==0){
+    for(j = 0;j <= 5;j++){
+      lcd.createChar(j,magicM[j]);
+    }
+    lcd.setCursor(0,0);
+    lcd.write(byte(0));
+    lcd.write(byte(1));
+    lcd.write(byte(2));
+  
+    lcd.setCursor(0,1);
+    lcd.write(byte(3));
+    lcd.write(byte(4));
+    lcd.write(byte(5));
+  }else{
+    for(j = 0;j <= 5;j++){
+      lcd1.createChar(j,magicM[j]);
+    }
+    lcd1.setCursor(0,0);
+    lcd1.write(byte(0));
+    lcd1.write(byte(1));
+    lcd1.write(byte(2));
+  
+    lcd1.setCursor(0,1);
+    lcd1.write(byte(3));
+    lcd1.write(byte(4));
+    lcd1.write(byte(5));
   }
-  lcd.setCursor(0,0);
-  lcd.write(byte(0));
-  lcd.write(byte(1));
-  lcd.write(byte(2));
-
-  lcd.setCursor(0,1);
-  lcd.write(byte(3));
-  lcd.write(byte(4));
-  lcd.write(byte(5));
 }
 
-void writeYugioh(){
-  for(j = 0;j <= 7;j++){
-    lcd.createChar(j,yugioh[j]);
-    lcd.setCursor(j,0);
-    lcd.write(byte(j));
+void writeYugioh(int d){
+  if(d==0){
+    for(j = 0;j <= 7;j++){
+      lcd.createChar(j,yugioh[j]);
+      lcd.setCursor(j,0);
+      lcd.write(byte(j));
+    }
+  }else{
+    for(j = 0;j <= 7;j++){
+      lcd1.createChar(j,yugioh[j]);
+      lcd1.setCursor(j,0);
+      lcd1.write(byte(j));
+    }
   }
 }
 
@@ -101,6 +139,7 @@ void setup() {
   
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
+  lcd1.begin(16, 2);
   Serial.begin(9600);
 }
 
@@ -111,17 +150,33 @@ void loop(){
 int Menu(){
   Key = keypad.getKey();
   if(Key){//-> Obtiene el valor del teclado
-    lcd.setCursor(15, 0);
-    lcd.autoscroll();
+    Serial.print(Key);
+    //lcd.setCursor(15, 0);
+    //lcd.autoscroll();
     switch(Key){
-      case 1:
-        writeYugioh();
+      case '1':
+        lcd.clear();
+        writeYugioh(0);
         break;
-      case 2:
-        writePokemon();
+      case '2':
+        lcd.clear();
+        writePokemon(0);
         break;
-      case 3:
-        writeMagic();
+      case '3':
+        lcd.clear();
+        writeMagic(0);
+        break;
+      case '4':
+        lcd1.clear();
+        writeYugioh(1);
+        break;
+      case '5':
+        lcd1.clear();
+        writePokemon(1);
+        break;
+      case '6':
+        lcd1.clear();
+        writeMagic(1);
         break;
       default:
         lcd.setCursor(0,0);
@@ -132,6 +187,6 @@ int Menu(){
       lcd.write(Key);
       delay(500);
     }*/
-    lcd.noAutoscroll();
+    //lcd.noAutoscroll();
   }
 }
