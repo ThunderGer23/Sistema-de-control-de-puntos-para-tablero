@@ -49,8 +49,7 @@
 #include "libKeypad.h"
 
 char Key, Key2;
-int pos;
-int j;
+int pos, j, scroll=0,vida;
 //Creating an instance of the LiquidCrystal library.
 //pinout rs=7, en=6, d4=5, d5=4, d6=3, d7=2;
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
@@ -90,9 +89,8 @@ void writeMagic(){
 
 void writeYugioh(){
   for(j=0;j<=7;j++){
-    lcd.setCursor(j,0);
     lcd.createChar(j,yugioh[j]);
-    Serial.print(j);
+    lcd.setCursor(j,0);
     lcd.write(byte(j));
   }
 }
@@ -101,535 +99,18 @@ void setup() {
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
   lcd1.begin(16, 2);
+  Serial.begin(9600);
 }
 
-byte load1[8] = {
-  B01111,
-  B01101,
-  B00100,
-  B00100,
-  B00110,
-  B00011,
-  B00001,
-  B00000
-};
-
-byte load2[8] = {
-  B11111,
-  B01010,
-  B10101,
-  B01010,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load3[8] = {
-  B11110,
-  B10110,
-  B00100,
-  B00100,
-  B01100,
-  B11000,
-  B10000,
-  B00000
-};
-
-byte load4[8] = {
-  B00000,
-  B00001,
-  B00011,
-  B00110,
-  B00100,
-  B00100,
-  B01100,
-  B01111
-};
-
-byte load5[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B11111
-};
-
-byte load6[8] = {
-  B00000,
-  B10000,
-  B11000,
-  B01100,
-  B00100,
-  B00100,
-  B00110,
-  B11110
-};
-
-byte load1a[8] = {
-  B01111,
-  B01100,
-  B00100,
-  B00100,
-  B00110,
-  B00011,
-  B00001,
-  B00000
-};
-
-byte load2a[8] = {
-  B11111,
-  B01010,
-  B10101,
-  B01010,
-  B00100,
-  B00000,
-  B10001,
-  B11011
-};
-
-byte load5a[8] = {
-  B11011,
-  B10101,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B01000,
-  B11111
-};
-
-byte load2b[8] = {
-  B11111,
-  B01000,
-  B10101,
-  B01010,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load5b[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B00000,
-  B00000,
-  B01010,
-  B11111
-};
-
-byte load2c[8] = {
-  B11111,
-  B01000,
-  B10101,
-  B01010,
-  B00100,
-  B00000,
-  B10001,
-  B11011
-};
-
-byte load3c[8] = {
-  B11110,
-  B00110,
-  B00100,
-  B00100,
-  B01100,
-  B11000,
-  B10000,
-  B00000
-};
-
-byte load5c[8] = {
-  B11011,
-  B10101,
-  B00000,
-  B00000,
-  B00000,
-  B00100,
-  B01010,
-  B11111
-};
-
-byte load2d[] = {
-  B11111,
-  B00000,
-  B10101,
-  B01010,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load5d[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B00000,
-  B00100,
-  B01010,
-  B11111
-};
-
-byte load6d[8] = {
-  B00000,
-  B10000,
-  B11000,
-  B01100,
-  B00100,
-  B00100,
-  B10110,
-  B11110
-};
-
-byte load2e[8] = {
-  B11111,
-  B00000,
-  B10001,
-  B01010,
-  B00100,
-  B00000,
-  B10001,
-  B11011
-};
-
-byte load5e[8] = {
-  B11011,
-  B10101,
-  B00000,
-  B00000,
-  B00000,
-  B10100,
-  B01010,
-  B11111
-};
-
-byte load2f[8] = {
-  B11111,
-  B00000,
-  B00001,
-  B01010,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load4f[8] = {
-  B00000,
-  B00001,
-  B00011,
-  B00110,
-  B00100,
-  B00100,
-  B01101,
-  B01111
-};
-byte load5f[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B00000,
-  B10100,
-  B01010,
-  B11111
-};
-
-byte load2g[8] = {
-  B11111,
-  B00000,
-  B00000,
-  B01010,
-  B00100,
-  B00000,
-  B10001,
-  B11011
-};
-
-byte load5g[8] = {
-  B11011,
-  B10101,
-  B00000,
-  B00000,
-  B00000,
-  B10101,
-  B01010,
-  B11111
-};
-
-byte load2h[8] = {
-  B11111,
-  B00000,
-  B00000,
-  B01000,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load5h[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B00010,
-  B10101,
-  B01010,
-  B11111
-};
-
-byte load2i[8] = {
-  B11111,
-  B00000,
-  B00000,
-  B00000,
-  B00100,
-  B00000,
-  B10101,
-  B11011
-};
-
-byte load5i[8] = {
-  B11011,
-  B10001,
-  B00100,
-  B00000,
-  B01010,
-  B10101,
-  B01010,
-  B11111
-};
-
-byte load2j[8] = {
-  B11111,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B10001,
-  B11011
-};
-
-byte load5j[8] = {
-  B11011,
-  B10101,
-  B00000,
-  B00100,
-  B01010,
-  B10101,
-  B01010,
-  B11111
-};
-
-byte giro1[8] = {
-  B11000,
-  B10000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000
-};
-
-byte giro2[8] = {
-  B10000,
-  B01000,
-  B00100,
-  B00100,
-  B00100,
-  B00100,
-  B00110,
-  B00011
-};
-
-byte giro3[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B11110
-};
-
-byte giro4[8] = {
-  B01111,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000
-};
-
-byte giro5[8] = {
-  B10000,
-  B11000,
-  B01000,
-  B01010,
-  B01001,
-  B01010,
-  B00101,
-  B00010
-};
-
-byte giro6[8] = {
-  B00001,
-  B00000,
-  B00000,
-  B10101,
-  B01010,
-  B00100,
-  B01001,
-  B10010
-};
-
-byte giro1a[8] = {
-  B00000,
-  B00000,
-  B11000,
-  B11110,
-  B10011,
-  B10000,
-  B10000,
-  B10000
-};
-
-byte giro2a[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B00001,
-  B10011,
-  B11110,
-  B01100,
-  B00000
-};
-
-byte giro3a[8] = {
-  B00000,
-  B00011,
-  B01111,
-  B11001,
-  B10011,
-  B00001,
-  B00011,
-  B00001
-};
-
-byte giro4a[8] = {
-  B10000,
-  B10000,
-  B10001,
-  B10011,
-  B11110,
-  B11000,
-  B00000,
-  B00000
-};
-
-byte giro5a[8] = {
-  B01100,
-  B11110,
-  B10011,
-  B00001,
-  B00000,
-  B00000,
-  B00000,
-  B00000
-};
-byte giro6a[8] = {
-  B01011,
-  B00101,
-  B10011,
-  B11101,
-  B01011,
-  B00111,
-  B00000,
-  B00000
-};
-///// giro3///
-byte giro1b[8] = {
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B01111
-};
-byte giro2b[8] = {
-  B00001,
-  B00010,
-  B00100,
-  B00100,
-  B00100,
-  B00100,
-  B01100,
-  B11000
-};
-byte giro3b[8] = {
-  B00011,
-  B00001,
-  B00000,
-  B00101,
-  B01010,
-  B10101,
-  B01010,
-  B10101
-};
-byte giro4b[8] = {
-  B11000,
-  B10000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00001,
-  B10011
-};
-byte giro5b[8] = {
-  B00011,
-  B00110,
-  B00100,
-  B00100,
-  B00100,
-  B00100,
-  B01000,
-  B10000
-};
-byte giro6b[8] = {
-  B11110,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000,
-  B00000
-};
-
 void loop(){
-  Menu();
+  //Menu();
+  selectGame();
 }
 
 void Menu(){
-  
+
+  lcd1.clear();
+  lcd.clear();
   lcd1.setCursor(4, 0);
   lcd1.print("Waiting!");
   for(int i = 0; i <= 2; i++){
@@ -644,25 +125,23 @@ void Menu(){
 }
 
 void Welcome(){
+  lcd.clear();
+  lcd1.clear();
   lcd.setCursor(0,0);
   lcd1.setCursor(0,0);
   lcd.print("Bienvenido a la Mesa");
   lcd1.print("Bienvenido a la Mesa");
-  delay(100);
+  delay(500);
   lcd.setCursor(4,1);
   lcd1.setCursor(4,1);
   lcd.print("de Super Juegos");
   lcd1.print("de Super Juegos");
-  delay(100);
-  lcd.clear();
-  lcd1.clear();
+  delay(500);
   lcd.setCursor(0,0);
   lcd1.setCursor(0,0);
   lcd.print("Chop Chop Shop");
   lcd1.print("Chop chop Shop");
-  delay(100);
-  lcd.clear();
-  lcd1.clear();
+  delay(500);
 }
 
 void Load(){
@@ -902,4 +381,61 @@ void Load(){
   lcd.write(4);
   lcd.write(5);
   delay(100);
+}
+
+void selectGame(){
+  char Key = keypad.getKey();
+
+  if(scroll==0){
+    lcd.setCursor(0,0);
+    lcd.write("Selecciona un");
+    lcd.setCursor(0,1);
+    lcd.write("  modo de juego...");
+  }
+  
+  if(Key){
+    lcd.clear();
+    switch(Key){
+      case '2':
+        scroll -= 1;
+        break;
+      case '8':
+        scroll += 1;
+        break;
+      case '5':
+        lcd.setCursor(0,0);
+        lcd.print(scroll);
+        delay(1000);
+    }
+    if(scroll<0){scroll=3;}
+    if(scroll>3){scroll=0;}
+    
+    switch(scroll){
+      case 1:
+        writePokemon();
+        vida=8000;
+        lcd.setCursor(12,0);
+        lcd.print(vida);
+        break;
+      case 2:
+        writeMagic();
+        vida=20;
+        lcd.setCursor(14,0);
+        lcd.print(vida);
+        break;
+      case 3:
+        writeYugioh();
+        vida=8000;
+        lcd.setCursor(12,0);
+        lcd.print(vida);
+        break;
+      default:
+        lcd.setCursor(0,0);
+        lcd.write("Selecciona un");
+        lcd.setCursor(0,1);
+        lcd.write("  modo de juego...");
+        break;
+        
+    }
+  }
 }
