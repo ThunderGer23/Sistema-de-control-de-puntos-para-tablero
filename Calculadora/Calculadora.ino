@@ -56,7 +56,7 @@ int j;
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 //Creating a second instance of the LiquidCrystal library.
 //pinout rs=13, en=12, d4=11, d5=10, d6=9, d7=8;
-LiquidCrystal lcd1(13, 12, 11, 10, 9, 8);
+LiquidCrystal lcd1(9, 8, 5, 4, 3, 2);
 
 void writePokemon(){
   for(j = 0;j <= 5;j++){
@@ -100,24 +100,801 @@ void writeYugioh(){
 void setup() {
   // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
-  Serial.begin(9600);
+  lcd1.begin(16, 2);
 }
+
+byte load1[8] = {
+  B01111,
+  B01101,
+  B00100,
+  B00100,
+  B00110,
+  B00011,
+  B00001,
+  B00000
+};
+
+byte load2[8] = {
+  B11111,
+  B01010,
+  B10101,
+  B01010,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load3[8] = {
+  B11110,
+  B10110,
+  B00100,
+  B00100,
+  B01100,
+  B11000,
+  B10000,
+  B00000
+};
+
+byte load4[8] = {
+  B00000,
+  B00001,
+  B00011,
+  B00110,
+  B00100,
+  B00100,
+  B01100,
+  B01111
+};
+
+byte load5[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B11111
+};
+
+byte load6[8] = {
+  B00000,
+  B10000,
+  B11000,
+  B01100,
+  B00100,
+  B00100,
+  B00110,
+  B11110
+};
+
+byte load1a[8] = {
+  B01111,
+  B01100,
+  B00100,
+  B00100,
+  B00110,
+  B00011,
+  B00001,
+  B00000
+};
+
+byte load2a[8] = {
+  B11111,
+  B01010,
+  B10101,
+  B01010,
+  B00100,
+  B00000,
+  B10001,
+  B11011
+};
+
+byte load5a[8] = {
+  B11011,
+  B10101,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B01000,
+  B11111
+};
+
+byte load2b[8] = {
+  B11111,
+  B01000,
+  B10101,
+  B01010,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load5b[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B00000,
+  B00000,
+  B01010,
+  B11111
+};
+
+byte load2c[8] = {
+  B11111,
+  B01000,
+  B10101,
+  B01010,
+  B00100,
+  B00000,
+  B10001,
+  B11011
+};
+
+byte load3c[8] = {
+  B11110,
+  B00110,
+  B00100,
+  B00100,
+  B01100,
+  B11000,
+  B10000,
+  B00000
+};
+
+byte load5c[8] = {
+  B11011,
+  B10101,
+  B00000,
+  B00000,
+  B00000,
+  B00100,
+  B01010,
+  B11111
+};
+
+byte load2d[] = {
+  B11111,
+  B00000,
+  B10101,
+  B01010,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load5d[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B00000,
+  B00100,
+  B01010,
+  B11111
+};
+
+byte load6d[8] = {
+  B00000,
+  B10000,
+  B11000,
+  B01100,
+  B00100,
+  B00100,
+  B10110,
+  B11110
+};
+
+byte load2e[8] = {
+  B11111,
+  B00000,
+  B10001,
+  B01010,
+  B00100,
+  B00000,
+  B10001,
+  B11011
+};
+
+byte load5e[8] = {
+  B11011,
+  B10101,
+  B00000,
+  B00000,
+  B00000,
+  B10100,
+  B01010,
+  B11111
+};
+
+byte load2f[8] = {
+  B11111,
+  B00000,
+  B00001,
+  B01010,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load4f[8] = {
+  B00000,
+  B00001,
+  B00011,
+  B00110,
+  B00100,
+  B00100,
+  B01101,
+  B01111
+};
+byte load5f[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B00000,
+  B10100,
+  B01010,
+  B11111
+};
+
+byte load2g[8] = {
+  B11111,
+  B00000,
+  B00000,
+  B01010,
+  B00100,
+  B00000,
+  B10001,
+  B11011
+};
+
+byte load5g[8] = {
+  B11011,
+  B10101,
+  B00000,
+  B00000,
+  B00000,
+  B10101,
+  B01010,
+  B11111
+};
+
+byte load2h[8] = {
+  B11111,
+  B00000,
+  B00000,
+  B01000,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load5h[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B00010,
+  B10101,
+  B01010,
+  B11111
+};
+
+byte load2i[8] = {
+  B11111,
+  B00000,
+  B00000,
+  B00000,
+  B00100,
+  B00000,
+  B10101,
+  B11011
+};
+
+byte load5i[8] = {
+  B11011,
+  B10001,
+  B00100,
+  B00000,
+  B01010,
+  B10101,
+  B01010,
+  B11111
+};
+
+byte load2j[8] = {
+  B11111,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B10001,
+  B11011
+};
+
+byte load5j[8] = {
+  B11011,
+  B10101,
+  B00000,
+  B00100,
+  B01010,
+  B10101,
+  B01010,
+  B11111
+};
+
+byte giro1[8] = {
+  B11000,
+  B10000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+
+byte giro2[8] = {
+  B10000,
+  B01000,
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B00110,
+  B00011
+};
+
+byte giro3[8] = {
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B11110
+};
+
+byte giro4[8] = {
+  B01111,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+
+byte giro5[8] = {
+  B10000,
+  B11000,
+  B01000,
+  B01010,
+  B01001,
+  B01010,
+  B00101,
+  B00010
+};
+
+byte giro6[8] = {
+  B00001,
+  B00000,
+  B00000,
+  B10101,
+  B01010,
+  B00100,
+  B01001,
+  B10010
+};
+
+byte giro1a[8] = {
+  B00000,
+  B00000,
+  B11000,
+  B11110,
+  B10011,
+  B10000,
+  B10000,
+  B10000
+};
+
+byte giro2a[8] = {
+  B00000,
+  B00000,
+  B00000,
+  B00001,
+  B10011,
+  B11110,
+  B01100,
+  B00000
+};
+
+byte giro3a[8] = {
+  B00000,
+  B00011,
+  B01111,
+  B11001,
+  B10011,
+  B00001,
+  B00011,
+  B00001
+};
+
+byte giro4a[8] = {
+  B10000,
+  B10000,
+  B10001,
+  B10011,
+  B11110,
+  B11000,
+  B00000,
+  B00000
+};
+
+byte giro5a[8] = {
+  B01100,
+  B11110,
+  B10011,
+  B00001,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
+byte giro6a[8] = {
+  B01011,
+  B00101,
+  B10011,
+  B11101,
+  B01011,
+  B00111,
+  B00000,
+  B00000
+};
+///// giro3///
+byte giro1b[8] = {
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B01111
+};
+byte giro2b[8] = {
+  B00001,
+  B00010,
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B01100,
+  B11000
+};
+byte giro3b[8] = {
+  B00011,
+  B00001,
+  B00000,
+  B00101,
+  B01010,
+  B10101,
+  B01010,
+  B10101
+};
+byte giro4b[8] = {
+  B11000,
+  B10000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00001,
+  B10011
+};
+byte giro5b[8] = {
+  B00011,
+  B00110,
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B01000,
+  B10000
+};
+byte giro6b[8] = {
+  B11110,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B00000
+};
 
 void loop(){
-  writeYugioh();
-  //Menu();
+  Menu();
 }
 
-int Menu(){
-  Key = keypad.getKey();
-  if(Key){//-> Obtiene el valor del teclado
-    lcd.setCursor(15, 0);
-    lcd.autoscroll();
-    for (pos = 0; pos < 10; pos++){
-      lcd.clear();
-      lcd.write(Key);
-      delay(500);
-    }
-    lcd.noAutoscroll();
+void Menu(){
+  
+  lcd1.setCursor(4, 0);
+  lcd1.print("Waiting!");
+  for(int i = 0; i <= 2; i++){
+    Load();
   }
+  Welcome();
+}
+
+void Welcome(){
+  lcd.setCursor(0,0);
+  lcd1.setCursor(0,0);
+  lcd.print("Bienvenido a la Mesa");
+  lcd1.print("Bienvenido a la Mesa");
+  delay(100);
+  lcd.setCursor(4,1);
+  lcd1.setCursor(4,1);
+  lcd.print("de Super Juegos");
+  lcd1.print("de Super Juegos");
+  delay(100);
+  lcd.clear();
+  lcd1.clear();
+  lcd.setCursor(0,0);
+  lcd1.setCursor(0,0);
+  lcd.print("Chop Chop Shop");
+  lcd1.print("Chop chop Shop");
+  delay(100);
+  lcd.clear();
+  lcd1.clear();
+}
+
+void Load(){
+  lcd.clear();
+  lcd.createChar(0, load1);
+  lcd.createChar(1, load2);
+  lcd.createChar(2, load3);
+  lcd.createChar(3, load4);
+  lcd.createChar(4, load5);
+  lcd.createChar(5, load6);
+  lcd.setCursor(6, 0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6, 1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2a);
+  lcd.createChar(2,load3);
+  lcd.createChar(3,load4);
+  lcd.createChar(4,load5a);
+  lcd.createChar(5,load6);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2b);
+  lcd.createChar(2,load3);
+  lcd.createChar(3,load4);
+  lcd.createChar(4,load5b);
+  lcd.createChar(5,load6);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2c);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4);
+  lcd.createChar(4,load5c);
+  lcd.createChar(5,load6);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2d);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4);
+  lcd.createChar(4,load5d);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2e);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4);
+  lcd.createChar(4,load5e);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2f);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4f);
+  lcd.createChar(4,load5f);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2g);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4f);
+  lcd.createChar(4,load5g);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2h);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4f);
+  lcd.createChar(4,load5h);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2i);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4f);
+  lcd.createChar(4,load5i);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,load1a);
+  lcd.createChar(1,load2j);
+  lcd.createChar(2,load3c);
+  lcd.createChar(3,load4f);
+  lcd.createChar(4,load5j);
+  lcd.createChar(5,load6d);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+
+  lcd.clear();
+  lcd.createChar(0,giro1);
+  lcd.createChar(1,giro2);
+  lcd.createChar(2,giro3);
+  lcd.createChar(3,giro4);
+  lcd.createChar(4,giro5);
+  lcd.createChar(5,giro6);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  
+  lcd.clear();
+  lcd.createChar(0,giro1a);
+  lcd.createChar(1,giro2a);
+  lcd.createChar(2,giro3a);
+  lcd.createChar(3,giro4a);
+  lcd.createChar(4,giro5a);
+  lcd.createChar(5,giro6a);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
+  
+  lcd.clear();
+  lcd.createChar(0,giro1b);
+  lcd.createChar(1,giro2b);
+  lcd.createChar(2,giro3b);
+  lcd.createChar(3,giro4b);
+  lcd.createChar(4,giro5b);
+  lcd.createChar(5,giro6b);
+  lcd.setCursor(6,0);
+  lcd.write(byte(0));
+  lcd.write(1);
+  lcd.write(2);
+  lcd.setCursor(6,1);
+  lcd.write(3);
+  lcd.write(4);
+  lcd.write(5);
+  delay(100);
 }
