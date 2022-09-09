@@ -47,7 +47,6 @@
 #include "libPokemon.h"
 #include "libMagic.h"
 #include "libKeypad.h"
-#include "libMenu.h"
 
 char Key, Key2;
 int pos, j, scroll=0,vida;
@@ -55,11 +54,9 @@ int pos, j, scroll=0,vida;
 //pinout rs=7, en=6, d4=5, d5=4, d6=3, d7=2;
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 //Creating a second instance of the LiquidCrystal library.
-//pinout rs=9, en=8, d4=5, d5=4, d6=3, d7=2;
+//pinout rs=13, en=12, d4=11, d5=10, d6=9, d7=8;
 LiquidCrystal lcd1(9, 8, 5, 4, 3, 2);
 
-
-//Writing Pokemon logo to LCD
 void writePokemon(){
   for(j = 0;j <= 5;j++){
     lcd.createChar(j,pokeball[j]);
@@ -75,7 +72,6 @@ void writePokemon(){
   lcd.write(byte(5));
 }
 
-//Writing Magic logo to LCD
 void writeMagic(){
   for(j = 0;j <= 5;j++){
     lcd.createChar(j,magicM[j]);
@@ -91,7 +87,6 @@ void writeMagic(){
   lcd.write(byte(5));
 }
 
-//Writing Yugioh logo to LCD
 void writeYugioh(){
   for(j=0;j<=7;j++){
     lcd.createChar(j,yugioh[j]);
@@ -100,22 +95,18 @@ void writeYugioh(){
   }
 }
 
-
 void setup() {
-  //Initialize lcd and set up the number of columns and rows
+  // initialize LCD and set up the number of columns and rows:
   lcd.begin(16, 2);
-  //Initialize lcd1 and set up the number of columns and rows
   lcd1.begin(16, 2);
   Serial.begin(9600);
 }
-
 
 void loop(){
   //Menu();
   selectGame();
 }
 
-//Displays a menu to select mode on the LCD
 void Menu(){
 
   lcd1.clear();
@@ -130,9 +121,9 @@ void Menu(){
   lcd1.print("Esperando configuración");
 
   //Aquí hay que poner a pintar las opciones en la primer LCD
+
 }
 
-//Shows a welcome message for the user
 void Welcome(){
   lcd.clear();
   lcd1.clear();
@@ -153,7 +144,6 @@ void Welcome(){
   delay(500);
 }
 
-//Shows an animation while loading the content
 void Load(){
   lcd.clear();
   lcd.createChar(0, load1);
@@ -393,7 +383,6 @@ void Load(){
   delay(100);
 }
 
-//Prompts the user to select a mode
 void selectGame(){
   char Key = keypad.getKey();
 
