@@ -1,7 +1,9 @@
+//A header guard. It prevents the header file from being included more than once.
 #ifndef libMenu_h;
 #define libMenu_h;
 #include "arduino.h";
 
+//Defining the byte array menu[][] which contains the bitmaps for the menu items.
 byte menu[][] = {
     {//load1
         0b01111,
@@ -438,4 +440,5 @@ byte menu[][] = {
     }
 };
 
+//The end of the header guard.
 #endif;

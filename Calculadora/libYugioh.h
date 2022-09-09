@@ -1,9 +1,9 @@
+//This is a preprocessor directive. It is used to prevent the header file from being included more than once.
 #ifndef libYugioh_h;
 #define libYugioh_h;
 #include "arduino.h";
 
-// make some custom characters:
-
+//Creating a custom character.
 byte yugioh[8][8] = {
   {
     0b00000,
@@ -80,4 +80,5 @@ byte yugioh[8][8] = {
   }
 };
 
+A preprocessor directive. It is used to terminate the header file.
 #endif;

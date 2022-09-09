@@ -1,9 +1,9 @@
+//A header guard. It prevents the header file from being included more than once.
 #ifndef libAbout_h;
 #define libAbout_h;
 #include "arduino.h";
 
 // make some custom characters:
-
 byte about[6][8] ={
     {
         0b11111,
@@ -62,4 +62,5 @@ byte about[6][8] ={
     }
 };
 
+//A header guard. It prevents the header file from being included more than once.
 #endif;

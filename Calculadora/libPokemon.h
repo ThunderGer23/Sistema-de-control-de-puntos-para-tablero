@@ -1,7 +1,9 @@
+//A header guard. It prevents the header file from being included more than once.
 #ifndef libPokemon_h;
 #define libPokemon_h;
 #include "arduino.h";
 
+//Creating a 2D array of bytes.
 byte pokeball[6][8] = {
   {//01
     0b00000,
@@ -60,4 +62,5 @@ byte pokeball[6][8] = {
   }
 }; 
 
+//A header guard. It prevents the header file from being included more than once.
 #endif;

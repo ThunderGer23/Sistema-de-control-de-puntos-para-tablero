@@ -2,8 +2,6 @@
 #define libMagic_h;
 #include "arduino.h";
 
-// make some custom characters:
-
 byte magicM[6][8] = {
   {
     0b00000,
@@ -61,6 +59,4 @@ byte magicM[6][8] = {
     0b00000
   }
 };
-//TODO: Si se lograra empaquetar en una sola matriz ser[ia ]
-
 #endif;
